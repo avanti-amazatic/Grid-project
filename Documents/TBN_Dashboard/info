@@ -1,0 +1,123 @@
+To do:
+rates
+ajax testing
+login with another user and see you should not see all the key performance index
+zoom and resize screens
+* will not be able to access current day
+* individual blog statistics
+
+calculations and rates with the blogs
+calculations and rates with the time period
+calculations and rates with the blog type
+graph plotting
+
+[ajax Testing]
+
+pie chart drag down test
+[yellow and red graph test]
+values appear in the key performance index or not
+login with another user and see you should not see all the key performance index
+zoom and resize screens test
+
+princess
+omniverous.com
+become a couponqueen.com
+simplyquinoa.com
+
+# wait = WebDriverWait(self.driver, 60)
+        # since_dropdown = ["YESTERDAY", "WEEK_TO_DATE", "MONTH_TO_DATE", "YEAR_TO_DATE"]
+        #
+        # for css_selector in since_dropdown:
+        #
+        #     # Click on 'Since' field to filter
+        #     self.driver.find_element_by_css_selector('#select_value_label_5 > span').click()
+        #
+        #     time.sleep(0.5)
+        #
+        #     # Click on the desired option from the dropdown according to the list [eg. '29' is for 'custom date range']
+        #     self.driver.find_element_by_css_selector('md-option[value = {0}] > div'.format(css_selector)).click()
+        #
+        #     # Find the loader and wait for it to disappear
+        #     self.driver.find_element_by_css_selector('md-progress-linear.loader.md-default-theme')
+        #     wait.until(EC.invisibility_of_element_located((
+        # By.CSS_SELECTOR, 'md-progress-linear.loader.md-default-theme')))
+        #
+        #     earnings = self.driver.find_element_by_css_selector(
+        #         'md-grid-tile.kpi:nth-child(2) > figure:nth-child(1) > div:nth-child(1)').text
+        #     earnings = earnings.split('\n')
+        #     earnings = earnings[0]
+        #     earnings = Decimal(sub(r'[^\d.]', '', earnings))
+        #     print earnings
+        #
+        #     if css_selector == "YESTERDAY":
+        #         required_date = (datetime.datetime.now() - datetime.timedelta(days=2))
+        #         day = str(required_date.strftime('%-d'))
+        #         month = required_date.strftime('%B')
+        #         year = required_date.strftime('%Y')
+        #
+        #         print self.driver.find_element_by_css_selector('md-grid-tile.kpi:nth-child(2) > figure:nth-child(1) '
+        #                                                        '> div:nth-child(1) > div:nth-child(1) > '
+        #                                                        'span:nth-child(1) > span:nth-child(1)').text
+        #
+        #         # Click on 'Since' filter type
+        #         self.driver.find_element_by_css_selector('#select_value_label_5 > span').click()
+        #
+        #         time.sleep(0.5)
+        #
+        #         # Select custom date range from the filter
+        #         self.driver.find_element_by_css_selector('#select_option_29 > div').click()
+        #
+        #         # Find the loader and wait till the loader disappears
+        #         self.driver.find_element_by_css_selector('md-progress-linear.loader.md-default-theme')
+        #         wait.until(EC.invisibility_of_element_located((
+        # By.CSS_SELECTOR, 'md-progress-linear.loader.md-default-theme')))
+        #
+        #         # Click on start date label
+        #         self.driver.find_element_by_xpath('//div[3]/div/md-card/md-card-content/div[2]/div/mdc-date-picker/'
+        #                                           'md-input-container').click()
+        #
+        #         self.driver.find_element_by_link_text(day).click()
+        #
+        #         earnings_yesterday = self.driver.find_element_by_css_selector(
+        #         'md-grid-tile.kpi:nth-child(2) > figure:nth-child(1) > div:nth-child(1)').text
+        #
+        #         earnings_yesterday = earnings_yesterday.split('\n')
+        #         earnings_yesterday = earnings_yesterday[0]
+        #
+        #         earnings_yesterday = Decimal(sub(r'[^\d.]', '', earnings_yesterday))
+        #         print earnings_yesterday
+        #
+        #         percentage_increase = ((float(earnings) - float(earnings_yesterday))/int(earnings_yesterday))*100
+        #         print percentage_increase
+        #
+        #         self.driver.find_element_by_link_text('')
+
+
+
+         displayed_value = self.driver.find_element_by_css_selector(
+                'md-grid-tile.kpi:nth-child({0}) > figure:nth-child(1) > div:nth-child(1)'.format(selector)).text
+            split_displayed_value = displayed_value.split('\n')
+            try:
+                value = float(Decimal(sub(r'[^\d.]', '', split_displayed_value[0])))
+                percentage_increase = split_displayed_value[1]
+                split_percentage_increase = percentage_increase.split(' ')
+                int_percentage_increase = float(split_percentage_increase[1])
+                if not value:
+                    performance_indicator = self.driver.find_element_by_css_selector(
+                        'md-grid-tile.kpi:nth-child({0}) > figure:nth-child(1) > md-grid-tile-footer:nth-child(2) > '
+                        'figcaption:nth-child(1) > span:nth-child(1)'.format(selector)).text
+                    print performance_indicator, 'is either zero or blank'
+                if not int_percentage_increase:
+                    performance_indicator_increased = self.driver.find_element_by_css_selector(
+                        'md-grid-tile.kpi:nth-child({0}) > figure:nth-child(1) > md-grid-tile-footer:nth-child(2) > '
+                        'figcaption:nth-child(1) > span:nth-child(1)'.format(selector)).text
+                    print performance_indicator_increased, 'percentage increase is either zero or blank'
+            except Exception:
+                # print e.__doc__
+                # print e.message
+                error_kpi = self.driver.find_element_by_css_selector(
+                    'md-grid-tile.kpi:nth-child({0}) > figure:nth-child(1) > md-grid-tile-footer:nth-child(2) > '
+                    'figcaption:nth-child(1) > span:nth-child(1)'.format(selector)).text
+                print 'Something has gone wrong with', error_kpi
+
+
