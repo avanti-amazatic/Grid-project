@@ -6,14 +6,13 @@ import users
 from locators import *
 
 
-class Page(object):
+class BasePage(object):
     """
     This Base class is serving basic attributes for every single page
     inherited from Page class
     """
     def __init__(self, driver):
         self.driver = driver
-        self.url = 'http://dev-tbn-dashboard.herokuapp.com/'
 
     def find_element(self, *locator):
         return self.driver.find_element(*locator)
@@ -33,11 +32,11 @@ class Page(object):
         hover.perform()
 
     def wait_for_element(self, *locator):
-        return WebDriverWait(self.driver, 25).until(
+        return WebDriverWait(self.driver, 10).until(
             EC.visibility_of_element_located(*locator))
 
 
-class MainPage(Page):
+class MainPage(BasePage):
 
     def check_page_loaded(self):
         return True if self.find_element(*MainPageLocators.logo) else False
@@ -47,10 +46,10 @@ class MainPage(Page):
         return SignUpPage(self.driver)
 
     def wait_for_button(self):
-        return self.wait_for_element(*LoginPageLocators.submit)
+        self.wait_for_element(MainPageLocators.login_again)
 
 
-class LoginPage(Page):
+class LoginPage(BasePage):
     def check_page_loaded(self):
         return True if self.find_element(*MainPageLocators.logo) else False
 
@@ -79,9 +78,9 @@ class LoginPage(Page):
         return self.find_element(*LoginPageLocators.error_message).text
 
 
-class HomePage(Page):
+class HomePage(BasePage):
     pass
 
 
-class SignUpPage(Page):
+class SignUpPage(BasePage):
     pass

@@ -4,13 +4,14 @@ from selenium import webdriver
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
+
 from pages import *
 
 
 class TestPages(unittest.TestCase):
 
     def setUp(self):
-        self.driver = webdriver.Chrome()
+        self.driver = webdriver.Firefox()
         # Page.open('http://dev-tbn-dashboard.herokuapp.com/')
         self.driver.get('http://dev-tbn-dashboard.herokuapp.com/')
 

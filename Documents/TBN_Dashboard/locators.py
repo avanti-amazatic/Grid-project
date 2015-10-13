@@ -11,3 +11,4 @@ class LoginPageLocators(object):
     password = (By.ID, 'id_auth-password')
     submit = (By.CLASS_NAME, 'btn')
     error_message = (By.CSS_SELECTOR, '.errorlist > li')
+
